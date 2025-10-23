@@ -16,7 +16,7 @@ authors = [
     {name = "Doug Downey"},
     {name = "Sergey Feldman"}
 ]
-urls = {Homepage = "https://github.com/allenai/SPECTER2_0"}
+urls = {Homepage = "https://github.com/allenai/SPECTER2"}
 
 dependencies = [
     "adapters>=0.1.0",
@@ -45,9 +45,6 @@ dependencies = [
     "six==1.16.0",
     "tokenizers>=0.12.1",
     "tomli==2.0.1",
-    "torch==1.13.1",
-    "torchvision==0.14.1",
-    "torchaudio==0.13.1",
     "tqdm==4.64.1",
     "transformers==4.35.2",
     "typing_extensions==4.5.0",
@@ -60,16 +57,32 @@ timo = [
     "pydantic==1.10.5",
     "pytest==7.2.1"
 ]
+cpu = [
+    "torch==1.13.1",
+    "torchvision==0.14.1",
+    "torchaudio==0.13.1"
+]
+gpu = [
+    "torch==1.13.1",
+    "torchvision==0.14.1",
+    "torchaudio==0.13.1"
+]
 
 [tool.setuptools]
 packages = ["specter2_0"]
 
 [[tool.uv.index]]
-name = "pytorch"
+name = "pytorch-cpu"
 url = "https://download.pytorch.org/whl/cpu"
 explicit = true
 
+[[tool.uv.index]]
+name = "pytorch-gpu"
+url = "https://download.pytorch.org/whl/cu118"
+explicit = true
+
+# By default, use CPU builds (change to pytorch-gpu for CUDA support)
 [tool.uv.sources]
-torch = { index = "pytorch" }
-torchvision = { index = "pytorch" }
-torchaudio = { index = "pytorch" }
+torch = { index = "pytorch-cpu" }
+torchvision = { index = "pytorch-cpu" }
+torchaudio = { index = "pytorch-cpu" }
